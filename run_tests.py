@@ -39,8 +39,8 @@ if Sve:
         xh_store[i] = mHalo.solve_xH(rr, redshift)
         tau_store[i] = mHalo.tau(.2, rr, redshift, mHalo.solve_xH(rr, redshift))
         tk_store[i] = mHalo.solve_Tk(rr, redshift)
-        yk_store[i] = mHalo.y_k(rr, redshift)
-        yalph_store[i] = mHalo.y_alpha(rr, redshift)
+        yk_store[i] = mHalo.y_k(rr, redshift, tk_store[i])
+        yalph_store[i] = mHalo.y_alpha(rr, redshift, tk_store[i])
         ts_store[i] = mHalo.T_spin(rr, redshift)
         t21_store[i] = mHalo_21.T_21(rr, redshift)
 

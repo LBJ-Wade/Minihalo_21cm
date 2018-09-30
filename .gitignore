@@ -1,0 +1,5 @@
+*.pyc
+*~
+papers/*
+Store_Tests/*
+.DS_Store

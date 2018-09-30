@@ -2,12 +2,13 @@ from minihalos import *
 import time
 
 SM = 100
+SM_2 = 1e4
 redshift=30
 Sve = True
 mHalo = Minihalos(SM)
 
 mHalo = Minihalos(SM, example_plots=True)
-mHalo_21 = Minihalos(SM, example_plots=False)
+mHalo_21 = Minihalos(SM_2, fpbh=1e-7, example_plots=False)
 
 radius = 1e-3
 r21 = 1e0
@@ -19,12 +20,15 @@ print 'yk for M\lambda = 100 and z = 30. Radius = 1e-3 kpc: ', mHalo.y_k(radius,
 print 'y_alpha for M\lambda = 100 and z = 30. Radius = 1e-3 kpc: ', mHalo.y_alpha(radius, redshift, tk)
 print 'Ts for M\lambda = 100 and z = 30. Radius = 1e-3 kpc: ', mHalo.T_spin(radius, redshift)
 print 'T_21 for M\lambda = 100 and z = 30. Radius = 1 kpc: ', mHalo.T_21(r21, redshift)
+print 'T_21 for M = 100 (REAL LAMBDA) and z = 30. Radius = 1 kpc: ', mHalo_21.T_21(r21, redshift)
 print 'Tk for M\lambda = 100 and z = 30. Radius = 1e4 kpc: ', mHalo.solve_Tk(1e4, redshift)
 
 tstart = time.time()
 print 'Sky averaged T_21 for M\lambda = 100, z = 30, f_pbh = 1: ', mHalo_21.mean_T21(redshift)
+
 tend = time.time()
 print tend - tstart
+exit()
 
 if Sve:
     radius_scan = np.logspace(-3, 5, 100)

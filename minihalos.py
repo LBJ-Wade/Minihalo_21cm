@@ -14,7 +14,7 @@ class Minihalos(object):
         else:
             self.lamb = lambda_dict['{:.0f}'.format(M)]
         
-        self.n_pbh = 1.256e-2*1e9 / M * 1e4 # Mpc^-3
+        self.n_pbh = 1.256e-2 * (omega_cdm / 1e-9) * fpbh / M * 1e4 # Mpc^-3
         
         loadTK = np.loadtxt('input_files/recfast_LCDM.dat')
         self.tk_0_highr = interp1d(loadTK[:,0], loadTK[:,-1])
@@ -153,8 +153,8 @@ class Minihalos(object):
         for i,r in enumerate(rtable):
             t21[i] = self.T_21(r, z)
             deltNu[i] = self.delta_nu_eff(r, z)
-        tilde_21 = np.trapz(2. * deltNu * t21 * rtable, rtable) / 1e3 # Mpc
-        preterm = (1.+z)**2.*clight/kpc_to_m/nu_21/hubble(z)*self.n_pbh
+        tilde_21 = np.trapz(2. * np.pi * deltNu * t21 * rtable, rtable)
+        preterm = (1.+z)**2./nu_21/hubble(z)*self.n_pbh/1e6
         return preterm * tilde_21
 
     def delta_nu_eff(self, r, z):

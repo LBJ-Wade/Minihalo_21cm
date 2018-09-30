@@ -147,7 +147,7 @@ class Minihalos(object):
         return soln - self.btb_0_highr(z)*self.solve_xH(r,z)
 
     def mean_T21(self, z):
-        rtable = np.logspace(-3, 5, 50)
+        rtable = np.logspace(-3, 5, 200)
         t21 = np.zeros_like(rtable)
         deltNu = np.zeros_like(rtable)
         for i,r in enumerate(rtable):

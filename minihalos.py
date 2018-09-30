@@ -5,11 +5,14 @@ from scipy.interpolate import interp1d
 from helpers import *
 
 class Minihalos(object):
-    def __init__(self, M, fpbh=1):
+    def __init__(self, M, fpbh=1, example_plots=False):
         self.e_min = 0.2
         self.e_max = 200.
         self.M = M
-        self.lamb = lambda_dict_show['{:.0f}'.format(M)]
+        if example_plots:
+            self.lamb = lambda_dict_show['{:.0f}'.format(M)]
+        else:
+            self.lamb = lambda_dict['{:.0f}'.format(M)]
         
         self.n_pbh = 1.256e-2*1e9 / M * 1e4 # Mpc^-3
         

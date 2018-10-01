@@ -47,8 +47,11 @@ class Minihalos(object):
         return self.lamb * Ledd / int_term
 
     def dN_dE(self, E, r, z): #units 1 / cm^2 / s / keV
-        tau = 0.
-        dtau = 0.
+        tau = self.tau(E, r, z, self.solve_xH(r, z))
+        pfact = np.zeros_like(E)
+        pfact[E < 0.25] = 2.65
+        pfact[E >= 0.25] = 3.30
+        dtau = -pfact * (E / 0.25) * tau
         prefactor = self.A_MLamb() / (4.*np.pi*r**2.) * (1./3.086e19/1e2)**2.
         term1 = np.exp(-tau) / E**2.
         term2 = -dtau * np.exp(-tau) / E
@@ -159,6 +162,6 @@ class Minihalos(object):
 
     def delta_nu_eff(self, r, z):
         tk = self.solve_Tk(r, z)
-        return np.sqrt(2.*kbolt*tk / 0.938e9) / (1.+z) * nu_21 / (1. + z)
+        return np.sqrt(2.*kbolt*tk / 0.938e9) / (1.+z) * nu_21 #/ (1. + z)
 
 

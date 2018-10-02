@@ -150,7 +150,8 @@ class Minihalos(object):
         return soln - self.btb_0_highr(z)*self.solve_xH(r,z)
 
     def mean_T21(self, z):
-        rtable = np.logspace(-3, 5, 200)
+        #rtable = np.logspace(-3, 5, 60)
+        rtable = np.linspace(0, 10.**5., 100)
         t21 = np.zeros_like(rtable)
         deltNu = np.zeros_like(rtable)
         for i,r in enumerate(rtable):
@@ -162,6 +163,6 @@ class Minihalos(object):
 
     def delta_nu_eff(self, r, z):
         tk = self.solve_Tk(r, z)
-        return np.sqrt(2.*kbolt*tk / 0.938e9) / (1.+z) * nu_21 #/ (1. + z)
+        return np.sqrt(2.*kbolt*tk / 0.938e9) / (1.+z) * nu_21 / (1. + z)
 
 

@@ -34,5 +34,5 @@ def hubble(z):
 def T_CMB(z):
     return 2.778 * (1. + z)
 
-lambda_dict = {'100': 1e-10, '1000': 1e-7, '10000': 1e-4}
+lambda_dict = {'100': 1e-1, '1000': 1e-1, '10000': 1e-1}
 lambda_dict_show = {'100': 1, '1000': 1, '10000': 1}

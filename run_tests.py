@@ -23,9 +23,10 @@ print 'T_21 for M\lambda = 100 and z = 30. Radius = 1 kpc: ', mHalo.T_21(r21, re
 print 'T_21 for M = 100 (REAL LAMBDA) and z = 30. Radius = 1 kpc: ', mHalo_21.T_21(r21, redshift)
 print 'Tk for M\lambda = 100 and z = 30. Radius = 1e4 kpc: ', mHalo.solve_Tk(1e4, redshift)
 
+print 'y_alpha for M\lambda = 100 and z = 30. Radius = 1e5 kpc: ', mHalo.y_alpha(1e5, redshift, mHalo.solve_Tk(1e5, redshift))
+
 tstart = time.time()
 print 'Sky averaged T_21 for M\lambda = 100, z = 30, f_pbh = 1: ', mHalo_21.mean_T21(redshift)
-
 tend = time.time()
 print tend - tstart
 exit()
@@ -48,7 +49,7 @@ if Sve:
         ts_store[i] = mHalo.T_spin(rr, redshift)
         t21_store[i] = mHalo_21.T_21(rr, redshift)
 
-    redshift_list = np.logspace(1, 2, 40)
+    redshift_list = np.logspace(1, np.log10(200), 40)
     t21_global = np.zeros_like(redshift_list)
     for i, z in enumerate(redshift_list):
         t21_global[i] = mHalo_21.mean_T21(z)
